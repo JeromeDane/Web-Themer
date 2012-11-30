@@ -55,6 +55,13 @@ com.jeromedane.webthemer.views.EditThemeView = Backbone.View.extend({
 		this.editor = ace.edit("edit_theme_css");
 		this.editor.setTheme("ace/theme/monokai");
 		this.editor.getSession().setMode("ace/mode/css");
+		this.editor.commands.addCommand({
+		    name: 'save',
+		    bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
+		    exec: function(editor) {
+				com.jeromedane.webthemer.Themer.saveData();
+		    }
+		});
 		
 		this.originalCss = this.editor.getValue();
 		
