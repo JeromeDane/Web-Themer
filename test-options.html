@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>ACE in Action</title>
+		<script src="com/jquery/jquery-1.8.2.min.js"></script>
+		<script src="nl/stroep/stroep.core.StringUtil.js"></script>
+		<script src="com/underscore/underscore-1.4.2.min.js"></script>
+		<script src="com/backbone/backbone-0.9.2.js"></script>
+		<script src="com/jeromedane/template.js"></script>
+		<script src="com/jeromedane/webthemer/webthemer.js"></script>
+		<script src="com/jeromedane/webthemer/models/ThemeModel.js"></script>
+		<script src="com/jeromedane/webthemer/collections/ThemeCollection.js"></script>
+		<script src="com/jeromedane/webthemer/views/EditThemeView.js"></script>
+		<style type="text/css" media="screen">
+			#editor {
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+			}
+		</style>
+		<script type="text/template" id="theme-template">
+			name: {name}
+		</script>
+		
+		<script type="text/template" id="theme-editor-template">
+			<h2>Editor</h2>
+			<p><strong>Name</strong> 
+				<input id="edit_theme_name" value="{name}" style="width:300px;"/>	
+			</p>
+			<p><strong>URL Pattern</strong> 
+				<input id="edit_theme_urlPattern" value="{urlPattern}" style="width:300px;"/>	
+			</p>
+			<p><strong>Enabled</strong>
+				<input id="edit_theme_enabled" value="1" type="checkbox"/>
+			</p>
+			
+			
+			<!--
+			<textarea id="edit_theme_css" style="width:100%; height:500px;">{css}</textarea>
+			-->
+			<p>
+				<input type="submit" id="saveThemesButton" value="Save Theme"/>
+				<input type="button" id="deleteThemeButton" value="Delete Theme"/>
+			</p>
+		</script>
+	</head>
+	<body>
+
+		<h1>Web Themer Options</h1>
+		
+		<h2>Installed Themes</h2>
+		<div id="themeList"></div>
+		
+		<p><input type="button" id="newThemeButton" value="New Theme"/></p>
+		
+		<div id="themeEditor"></div>
+
+		<div style="position:relative; height:400px; width:400px;">
+			<div id="editor">
+				function foo(items) {
+				var x = "All this is syntax highlighted";
+				return x;
+				}
+			</div>
+		</div>
+
+		<!--<script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>-->
+		<script src="org/ajax/ace/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			var editor = ace.edit("edit_theme_css");
+			editor.setTheme("ace/theme/monokai");
+			editor.getSession().setMode("ace/mode/javascript");
+		</script>
+	</body>
+</html>
