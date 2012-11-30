@@ -25,7 +25,10 @@
 		"default_icon": "icon_16.png"
 	},
 	"background": {
-		"scripts": ["com/jeromedane/webthemer/Themer.js", "background.js"],
+		"scripts": [
+			"com/jeromedane/webthemer/Themer.js", 
+			"background.js"
+		],
 		"persistent": true
 	}
    
