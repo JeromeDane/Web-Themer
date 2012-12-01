@@ -63,7 +63,9 @@ tr, td {
 #themeList .theme > .name {
 	width:300px;
 }
-	
+#themeList .disabled > .name {
+	color:#aaa;	
+}
 #themeList .tools img {
 	cursor:pointer;
 	opacity:0.5;

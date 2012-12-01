@@ -10,8 +10,17 @@ com.jeromedane.webthemer.views.ThemeView = Backbone.View.extend({
 		},
 		
 		events : {
+			'change .enabled input[type="checkbox"]' : 'toggleEnabled',
 			'click .edit' : 'edit_clicked',
 			'click .delete' : 'delete_clicked'
+			
+		},
+		
+		toggleEnabled:function(e) {
+			var checked = e.target.checked;
+			this.model.attributes.enabled = checked;
+			Themer.saveData();
+			this.render();
 		},
 		
 		edit_clicked: function(e) {
@@ -40,6 +49,16 @@ com.jeromedane.webthemer.views.ThemeView = Backbone.View.extend({
 			this.$el.html( 
 			 	this.template.render(this.model.toJSON()) 
 			);
+			
+			if(this.model.attributes.enabled) {
+				$('.enabled input[type="checkbox"]', this.$el).attr('checked', true);
+			}
+			
+			if(!this.model.attributes.enabled) {
+				this.$el[0].className += ' disabled';
+			} else {
+				this.$el[0].className = this.$el[0].className.replace(/\sdisabled/, '');
+			}
 			
 			return this;
 		}

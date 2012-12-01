@@ -48,7 +48,7 @@ function injectTabCss(tab) {
 }
 function updateTabBadge(tab) {
 			
-	var numThemes = Themer.getThemesForUrl(tab.url).length;
+	var numThemes = Themer.getThemesForUrl(tab.url, true).length;
 	
 	chrome.browserAction.setBadgeText({
 		text: numThemes > 0 ? numThemes + "" : "",

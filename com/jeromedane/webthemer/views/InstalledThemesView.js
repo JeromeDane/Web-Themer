@@ -30,6 +30,10 @@ com.jeromedane.webthemer.views.InstalledThemesView = Backbone.View.extend({
 			
 			themesCollection.add(theme);
 			Themer.saveData();
+			
+			Views.editor.model = theme;
+			Views.editor.render();
+			
 		});		
 				
 	}

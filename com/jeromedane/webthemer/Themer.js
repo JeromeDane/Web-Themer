@@ -203,13 +203,14 @@ com.jeromedane.webthemer.Themer = new (function() {
 		renderThemesView:function() {
 			new com.jeromedane.webthemer.ThemeListView({ collection:this.getThemesCollection() });
 		},
-		getThemesForUrl:function(url) {
+		getThemesForUrl:function(url, enabledOnly) {
+			enabledOnly = typeof(enabledOnly) == 'undefined' ? false : enabledOnly; 
 			var themes = [];
 			for(var i = 0; i < _data.themes.length; i++) {
 				var theme = _data.themes[i];
 				var pattern = new RegExp(theme.urlPattern, "i");
 				
-				if(theme.css != '' && url.match(pattern)) {
+				if((!enabledOnly || theme.enabled) && theme.css != '' && url.match(pattern)) {
 					themes.push(theme);	
 				}
 			}
@@ -219,7 +220,7 @@ com.jeromedane.webthemer.Themer = new (function() {
 			
 			var styleElem = document.getElementById('webThemerCss');
 			
-			var themes = this.getThemesForUrl(document.location.toString());
+			var themes = this.getThemesForUrl(document.location.toString(), true);
 			
 			var html = '';
 			for(var i = 0; i < themes.length; i++) {			

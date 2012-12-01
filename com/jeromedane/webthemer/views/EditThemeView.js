@@ -11,7 +11,8 @@ com.jeromedane.webthemer.views.EditThemeView = Backbone.View.extend({
 	},
 	
 	events : {
-		'click #saveThemesButton' : 'save_theme',
+		'click #saveButton' : 'save_theme',
+		'click #saveAndCloseButton' : 'save_and_close_theme',
 		'click #deleteThemeButton' : 'delete_theme',
 		'click #cancelEditThemeButton' : 'cancel'
 	},
@@ -19,11 +20,12 @@ com.jeromedane.webthemer.views.EditThemeView = Backbone.View.extend({
 		this.model.set('name', $('#edit_theme_name').val());
 		this.model.set('urlPattern', $('#edit_theme_urlPattern').val());
 		this.model.set('css', this.editor.getValue());
-		
+		this.model.set('enabled', $('#edit_theme_enabled').attr('checked'));
 		com.jeromedane.webthemer.Themer.saveData();
-		
+	},
+	save_and_close_theme:function() {
+		this.save_theme();
 		Views.installedThemes.render();
-		
 	},
 	delete_theme: function(e) {
 		if(confirm("Are you sure you want to delete this theme?")) {
@@ -44,13 +46,15 @@ com.jeromedane.webthemer.views.EditThemeView = Backbone.View.extend({
 		
 		this.$el.html(this.template.render(this.model.toJSON()));
 
-		$('#edit_theme_enabled').attr('checked', this.model.enabled);
+		$('#edit_theme_enabled').attr('checked', this.model.attributes.enabled);
 
 		// clear out empty css values		
 		var css = $('#edit_theme_css').html();
 		if(css == '{css}') {
 			$('#edit_theme_css').html('');
 		}
+
+		var _view = this;
 
 		this.editor = ace.edit("edit_theme_css");
 		this.editor.setTheme("ace/theme/monokai");
@@ -59,9 +63,13 @@ com.jeromedane.webthemer.views.EditThemeView = Backbone.View.extend({
 		    name: 'save',
 		    bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
 		    exec: function(editor) {
-				com.jeromedane.webthemer.Themer.saveData();
+				_view.save_theme();
 		    }
 		});
+		
+		var height = $(window).height() - 250;
+		$('#edit_theme_css').height(height);
+		$('#edit_theme_css').parent().height(height + 10);
 		
 		this.originalCss = this.editor.getValue();
 		
