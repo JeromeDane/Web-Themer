@@ -21,6 +21,42 @@
 		<link rel="stylesheet" href="com/jqueryui/css/ui-darkness/jquery-ui-1.9.2.custom.min.css">
 		<link rel="stylesheet" href="options.css">
 		
+		<script type="text/template" id="about-template">
+			<h2>About Web Themer (alpha) <span id="versionNumber">v0.0.1</span></h2>
+			<p style="color:#990000;">
+				<strong>This project is in ALPHA development, which means it is NOT finished.</strong>
+				There may be bugs, as well as missing features. New features will be added and bugs will be 
+				fixed as there is time. In other words, this version is for <strong>testing purposes only</strong>.
+			</p>
+			<p>Easily change the look and feel of any web page. Instal user scripts from sites like
+				<a href="http://userstyles.org" target="_blank">userstyles.org</a>, or create your own.</p>
+			<p>The concept behind this is not new. This project was started to provide a better version of extensions like 
+				<a href="https://chrome.google.com/webstore/detail/stylish/fjnbnpbmkenffdnngjfgmeleoegfcffe" target="_blank">Stylish</a>.
+			</p>
+			<p>This project is open source, so if you would like to get involved, 
+				feel free to fork the repository on Github.
+			</p>
+			<ul>
+				<li><a href="https://github.com/JeromeDane/Web-Themer" target="_blank">Project Home Page</a></li>
+				<li><a href="https://github.com/JeromeDane/Web-Themer/issues">Feedback &amp; Bug Reports</a></li>
+			</ul>
+			<h3>Author</h3>
+			
+			
+		</script>
+		
+		<script type="text/template" id="options-template">
+			<h2>General Options</h2>
+			<p>Nothing here yet. Stay tuned.</p>
+			<h3>Have suggestions for this section?</h3>
+			<p>You can
+				<a href="https://github.com/JeromeDane/Web-Themer/issues/new" target="_blank">submit a suggestion</a>,
+				but please check out the <a href="https://github.com/JeromeDane/Web-Themer/issues/new" target="_blank">known issues</a>
+				to make sure someone hasn't already requested the feature. 
+			</p>
+			
+		</script>
+		
 		<script type="text/template" id="installed-themes-template">
 			<h2>Installed Themes</h2>
 			<div id="themeList"></div>
@@ -59,15 +95,14 @@
 			</p>
 		</script>
 		
-		
 	</head>
 	<body>
 		<div id="sidebar">
-			<h1>Web Themer</h1>
+			<h1>Web Themer (a)</h1>
 			<ul class="menu">
 				<li id="menu_installedThemes">Installed Themes</li>
-				<li id="menu_installedThemes">General Options</li>
-				<li id="menu_installedThemes">Project Home Page</li>
+				<li id="menu_options">General Options</li>
+				<li id="menu_about">About Web Themer</li>
 			</ul>
 		</div>
 		<div id="content"></div>

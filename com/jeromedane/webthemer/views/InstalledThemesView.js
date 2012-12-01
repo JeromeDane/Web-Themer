@@ -7,15 +7,14 @@ com.jeromedane.webthemer.views.InstalledThemesView = Backbone.View.extend({
 	el: '#content',
 	
 	initialize:function() {
-		// this.render();
+	//	this.render();
 	},
-	
-	setTemplate:function(id) {
-		var html = $('#' + id).html();
-		this.template = new com.jeromedane.Template(html);	
-	},
-	
 	render:function() {
+		
+		if(typeof(this.template) == 'undefined') {
+			this.template = new com.jeromedane.Template($('#installed-themes-template').html());
+		}
+		
 		this.$el.html('');
 		this.$el.html(this.template.render());
 
