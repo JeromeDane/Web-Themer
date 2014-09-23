@@ -1,36 +1,52 @@
-var Themer = com.jeromedane.webthemer.Themer;
-var Views = {
-	
-};
+var dependencies = [
+	'themer',
+	'template',
+	'app/views/InstalledThemesView',
+	'app/collections/ThemeCollection'
+];
 
-jQuery(function($) {
-	
-	Views.editor = new com.jeromedane.webthemer.views.EditThemeView();
-	Views.about = {
-		template: new com.jeromedane.Template($('#about-template').html()),
-		render:function() {
-			$('#content').html(Views.about.template.render());
-		}	
-	};
-	Views.options = {
-		template: new com.jeromedane.Template($('#options-template').html()),
-		render:function() {
-			$('#content').html(Views.options.template.render());
-		}	
-	};
-	
-	Themer.init(function() {
+var Views = {};
 
-		Views.installedThemes = new com.jeromedane.webthemer.views.InstalledThemesView();
-		Views.installedThemes.render();
+define(dependencies, function(Themer, Template, InstalledThemesView, ThemeCollection) {
+
+	return new (function() {
 		
-		$('#menu_installedThemes').click(function() {
-			Views.installedThemes.render();
-		});
-		$('#menu_about').click(Views.about.render);
-		$('#menu_options').click(Views.options.render);
+		this.init = function() {
+			
+			Views.about = {
+				template: new Template($('#about-template').html()),
+				render:function() {
+					$('#content').html(Views.about.template.render());
+				}	
+			};
+			
+			Views.options = {
+				template: new Template($('#options-template').html()),
+				render:function() {
+					$('#content').html(Views.options.template.render());
+				}	
+			};
+			
+			Themer.init(function() {
 		
-	});
-	
+				Views.installedThemes = new InstalledThemesView();
+				
+				Views.installedThemes.render();
+				
+				$('#menu_about').click(Views.about.render);
+				$('#menu_installedThemes').click(function() {
+					Views.installedThemes.render();
+				});
+				
+				
+				$('#menu_options').click(Views.options.render);
+				
+			});
+		};
+			
+	})();
+
+		
 	
 });
+

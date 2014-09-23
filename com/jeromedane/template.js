@@ -1,21 +1,27 @@
-/**
- * dependencies
- *
- * 		jquery 	
- * 		stroep.core.StringUtil.js
- */
+var dependencies = [
+	'stringutils'
+]; 
 
-var com = com || {};
-com.jeromedane = com.jeromedane || {};
-
-com.jeromedane.Template = function(src, reply) {
+define(dependencies, function() {
 	
-	return {
-		source:src,
-		render:function(params) {
-			
-			return params ? stroep.core.StringUtil.replaceVars(this.source, params) : this.source;
-		}
-	}
+	/**
+	 * dependencies
+	 *
+	 * 		jquery 	
+	 * 		stroep.core.StringUtil.js
+	 */
 	
-}
+	var Template = function(src, reply) {
+		
+		return {
+			source: src,
+			render:function(params) {
+				
+				return params ? stroep.core.StringUtil.replaceVars(this.source, params) : this.source;
+			}
+		};
+	};
+	
+	return Template;
+	
+});

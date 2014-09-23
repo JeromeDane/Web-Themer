@@ -1,7 +1,15 @@
-com.jeromedane.webthemer.collections = com.jeromedane.webthemer.collections || {};
-com.jeromedane.webthemer.collections.ThemeCollection = Backbone.Collection.extend({
+
+var dependencies = [
+	'app/models/ThemeModel'
+];
+
+define(dependencies, function(ThemeModel) {
 	
-	// Reference to this collection's model.
-	model: com.jeromedane.webthemer.models.ThemeModel
-	
+	var ThemeCollection = Backbone.Collection.extend({
+		
+		// Reference to this collection's model.
+		model: ThemeModel
+		
+	});
+	return ThemeCollection;
 });

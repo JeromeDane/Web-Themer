@@ -1,7 +1,7 @@
-var Themer = com.jeromedane.webthemer.Themer;
 function injectThemes() {
-	Themer.init(function() {
-		Themer.injectThemes();	
+	buildWebThemer();
+	WebThemer.init(function() {
+		WebThemer.injectThemes();	
 	});
 	
 }

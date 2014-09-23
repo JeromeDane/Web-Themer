@@ -1,6 +1,13 @@
-com.jeromedane.webthemer.views = com.jeromedane.webthemer.views || {};
 
-com.jeromedane.webthemer.views.ThemeView = Backbone.View.extend({
+var dependencies = [
+	'template',
+	'themer',
+	'app/views/EditThemeView'
+];
+
+define(dependencies, function(Template, Themer, EditThemeView) {
+
+	var View = Backbone.View.extend({
 	
 		tagName:  'div',
 		className: 'theme',
@@ -25,8 +32,11 @@ com.jeromedane.webthemer.views.ThemeView = Backbone.View.extend({
 		
 		edit_clicked: function(e) {
 			
-			Views.editor.model = this.model;
-			Views.editor.render();
+			var editorView = new EditThemeView({
+				model: this.model
+			});
+			
+			editorView.render();
 			
 		},
 		
@@ -43,7 +53,7 @@ com.jeromedane.webthemer.views.ThemeView = Backbone.View.extend({
 		render: function() {
 			
 			if(!(this.template)) {
-				this.template = new com.jeromedane.Template($('#theme-row-template').html());
+				this.template = new Template($('#theme-row-template').html());
 			}
 			
 			this.$el.html( 
@@ -64,3 +74,5 @@ com.jeromedane.webthemer.views.ThemeView = Backbone.View.extend({
 		}
 	
 	});
+	return View;
+});

@@ -1,6 +1,9 @@
-com.jeromedane.webthemer.views = com.jeromedane.webthemer.views || {};
+var dependencies = [
+	'app/views/ThemeRowView'
+];
+define(dependencies, function(ThemeRowView) {
 
-com.jeromedane.webthemer.views.ThemeListView = Backbone.View.extend({
+	var ThemeListView = Backbone.View.extend({
 		
 		// Instead of generating a new element, bind to the existing skeleton of
 		// the App already present in the HTML.
@@ -25,7 +28,7 @@ com.jeromedane.webthemer.views.ThemeListView = Backbone.View.extend({
 			
 			_.each(this.collection.models, function(theme) {
 
-				var view = new com.jeromedane.webthemer.views.ThemeView({ model:theme });
+				var view = new ThemeRowView({ model:theme });
 
 				this.$el.append(view.render().el);				
 				
@@ -34,3 +37,6 @@ com.jeromedane.webthemer.views.ThemeListView = Backbone.View.extend({
 		}
 		
 	});
+	
+	return ThemeListView;
+});

@@ -3,7 +3,7 @@
 	"name": "__MSG_extName__",
 	"description": "__MSG_extDesc__",
 	"version": "0.0.1",
-	"permissions": ["bookmarks", "tabs"],
+	"permissions": ["bookmarks", "tabs", "storage"],
 	"default_locale": "en",
 	"options_page": "options.html",
 	"content_scripts": [
@@ -20,7 +20,7 @@
 		"default_popup": "popup.html"
 	},
 	"background": {
-		"scripts": ["com/jeromedane/webthemer/Themer.js", "background.js"],
+		"scripts": ["org/requirejs/require.js", "background.js"],
 		"persistent": true
 	}
 }

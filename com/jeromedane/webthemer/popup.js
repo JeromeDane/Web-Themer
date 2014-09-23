@@ -1,3 +1,7 @@
+var dependencies = [
+	'jquery'
+];
+
 var Themer = com.jeromedane.webthemer.Themer;
 
 jQuery(function($) {
