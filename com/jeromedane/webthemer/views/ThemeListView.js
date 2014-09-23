@@ -7,10 +7,16 @@ com.jeromedane.webthemer.views.ThemeListView = Backbone.View.extend({
 		el: '#themeList',
 		
 		initialize:function() {
-			this.render();
+			
+			if(!this.collection) {
+				this.collection = Themer.getThemeCollection();
+			}
+			
 			// Cache the template function for a single product.
 			this.collection.bind('add', this.render, this);
 			this.collection.bind('remove', this.render, this);
+			
+			this.render();
 		},
 		
 		render:function() {

@@ -11,13 +11,13 @@ jQuery(function($) {
 		render:function() {
 			$('#content').html(Views.about.template.render());
 		}	
-	}
+	};
 	Views.options = {
 		template: new com.jeromedane.Template($('#options-template').html()),
 		render:function() {
 			$('#content').html(Views.options.template.render());
 		}	
-	}
+	};
 	
 	Themer.init(function() {
 

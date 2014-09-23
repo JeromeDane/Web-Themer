@@ -221,6 +221,7 @@ com.jeromedane.webthemer.Themer = new (function() {
 			var styleElem = document.getElementById('webThemerCss');
 			
 			var themes = this.getThemesForUrl(document.location.toString(), true);
+			console.log(themes);
 			
 			var html = '';
 			for(var i = 0; i < themes.length; i++) {			
@@ -229,7 +230,11 @@ com.jeromedane.webthemer.Themer = new (function() {
 				
 			
 			if(styleElem == null) {
-				document.getElementsByTagName('head')[0].innerHTML += '<style type="text/css" id="webThemerCss">' + html + '</style>';
+				var styleWrapper = document.createElement("style");
+				styleWrapper.setAttribute('type', 'text/css');
+				styleWrapper.setAttribute('id', 'webThemerCss');
+				styleWrapper.innerHTML = html;
+				document.getElementsByTagName('head')[0].appendChild(styleWrapper);
 			} else {
 				styleElem.innerHTML = html;
 			}

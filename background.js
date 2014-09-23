@@ -6,9 +6,9 @@ function createBookmark(url, title, reply) {
 	var bookmark = {
 		url:url,
 		title:title
-	}
+	};
 	chrome.bookmarks.create(bookmark, reply);
-	updateAllTabBadges();
+	//updateAllTabBadges();
 }
 
 function updateBookmark(id, title, reply) {
@@ -54,6 +54,11 @@ function updateTabBadge(tab) {
 		text: numThemes > 0 ? numThemes + "" : "",
 		tabId: parseInt(tab.id)
 	});
+	/*
+	chrome.browserAction.setBadgeBackgroundColor({
+		color: '#339933'
+	});
+	*/
 		
 };
 
@@ -80,6 +85,10 @@ chrome.extension.onRequest.addListener(function(request, sender, reply) {
 			chrome.tabs.get(sender.tab.id, function(tab) {
 				updateTabBadge(tab);		
 			});
+			break;
+		case 'updateAllTabBadges':
+			return;	// deprecated
+			updateAllTabBadges();
 			break;
 	}
 });
