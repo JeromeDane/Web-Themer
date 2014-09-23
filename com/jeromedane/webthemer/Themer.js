@@ -62,7 +62,6 @@ function buildWebThemer(ThemeModel, ThemeCollection) {
 			}			
 		}
 		
-		
 		/**
 		 * Get the stored bookmark data string 
 		 */
@@ -104,6 +103,27 @@ function buildWebThemer(ThemeModel, ThemeCollection) {
 		
 		function _loadData(reply) {
 			
+			function _report(data) {
+				
+				if(typeof(data.themes) == 'undefined') {
+					data.themes = [];
+				}
+				_data = data;
+				reply(data);
+			}
+			
+			if(typeof(IN_BACKGROUND_PAGE) != 'undefined') {
+				// we're on the background page, so just call the getBookmark function directly
+				getData(function(data) {
+					_report(data);
+				});
+			} else {
+				_sendRequest({ name: 'getData' }, function(data) {
+					_report(data);
+				});
+				
+			}
+			/*
 			_getBookmarkDataString(function(dataString) {
 				
 				// check to see that data string was found
@@ -122,6 +142,7 @@ function buildWebThemer(ThemeModel, ThemeCollection) {
 					});
 				}
 			});
+			*/
 		}
 		function _validateData() {
 			if(typeof(_data.themes) == 'undefined') {
@@ -200,28 +221,20 @@ function buildWebThemer(ThemeModel, ThemeCollection) {
 				
 				_updateDataFromThemesCollection();
 				
-				var dataString = JSON.stringify(_data);
-				_getBookmark(function(bookmark) {
-					
-					var title = _config.bookmark.title + dataString;
-					
-					// save bookmark based on browser
-					switch(_getBrowserName()) {
-						case 'chrome':
-							_sendRequest({ name:"updateBookmark", id:bookmark.id, title:title }, function() {
-								if(typeof(reply) == 'function')
-									reply();
-							});
-							break;
-					}
-				});
+				// save bookmark based on browser
+				switch(_getBrowserName()) {
+					case 'chrome':
+						_sendRequest({ name:"saveData", data: _data}, function() {
+							if(typeof(reply) == 'function')
+								reply();
+						});
+						break;
+				}
 			},
 			renderThemesView:function() {
 				new com.jeromedane.webthemer.ThemeListView({ collection:this.getThemesCollection() });
 			},
 			getThemesForUrl:function(url, enabledOnly) {
-				
-				console.log('getting themes for ' + url);
 				
 				enabledOnly = typeof(enabledOnly) == 'undefined' ? false : enabledOnly; 
 				var themes = [];
@@ -235,12 +248,10 @@ function buildWebThemer(ThemeModel, ThemeCollection) {
 					}
 				}
 				
-				console.log(themes);
 				return themes;
 			},
 			injectThemes:function() {
 				
-				var styleElem = document.getElementById('webThemerCss');
 				
 				var themes = this.getThemesForUrl(document.location.toString(), true);
 				
@@ -250,14 +261,18 @@ function buildWebThemer(ThemeModel, ThemeCollection) {
 				}
 					
 				
-				if(styleElem == null) {
-					var styleWrapper = document.createElement("style");
+				var styleWrapper = document.getElementById('webThemerCss');
+				if(styleWrapper == null) {
+					styleWrapper = document.createElement("style");
 					styleWrapper.setAttribute('type', 'text/css');
 					styleWrapper.setAttribute('id', 'webThemerCss');
 					styleWrapper.innerHTML = html;
-					document.getElementsByTagName('head')[0].appendChild(styleWrapper);
+				}
+				styleWrapper.innerHTML = html;
+				if(document.body) {
+					document.body.appendChild(styleWrapper);
 				} else {
-					styleElem.innerHTML = html;
+					document.getElementsByTagName('head')[0].appendChild(styleWrapper);
 				}
 				
 				// update tab badge

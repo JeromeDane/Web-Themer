@@ -16,3 +16,7 @@ if(typeof(chrome) != 'undefined' && typeof(chrome.extension) != 'undefined') {
 	});
 }
 injectThemes();
+
+window.addEventListener('load', function() {
+	injectThemes();
+}, false );

@@ -15,6 +15,17 @@ require.config({
 
 var IN_BACKGROUND_PAGE = true;
 
+var getData;
+var saveData;
+
+var _config = {
+	bookmark:{
+		url:'http://webthemer.jeromedane.com',
+		title:'Web Themer Extension Data (do not modify) ',
+		replacementPattern: /Web Themer Extension Data \(do not modify\) /
+	}
+};
+
 function getBookmark(searchTerm, reply) {
 	
 	chrome.bookmarks.search(searchTerm, function(result) {
@@ -35,6 +46,41 @@ var dependencies = [
 	'com/jeromedane/webthemer/bootstrap',
 ];
 require(dependencies, function(Themer) {
+	
+	saveData = function(data, reply) {
+		if(typeof(data) == 'string') {
+			data = JSON.parse(data);
+		}
+		chrome.storage.local.set(data, function (result) {
+			if(typeof(reply) == 'function') {
+				updateAllTabs();
+				reply();
+			};
+	    });
+	};
+	
+	getData = function(reply) {
+		
+		chrome.storage.local.get(function (result) {
+	        reply({
+	        	themes: result.themes
+	        });
+	    });
+		
+		return; // don't use bookmark for now
+		getBookmark(_config.bookmark.title, function(bookmark) {
+			if(bookmark) {
+				var str = bookmark.title.replace(_config.bookmark.replacementPattern, '');
+				var data = JSON.parse(str);
+				reply(data);
+			} else {
+				createBookmark(_config.bookmark.url, _config.bookmark.title, function() {
+					getData(reply);
+				});
+			}
+			
+		});
+	};
 	
 	function createBookmark(url, title, reply) {
 		var bookmark = {
@@ -100,6 +146,12 @@ require(dependencies, function(Themer) {
 				break;
 			case 'getBookmark':
 				getBookmark(request.title, reply);
+				break;
+			case 'getData':
+				getData(reply);
+				break;
+			case 'saveData':
+				saveData(request.data, reply);
 				break;
 			case 'updateBookmark':
 				updateBookmark(request.id, request.title, reply);

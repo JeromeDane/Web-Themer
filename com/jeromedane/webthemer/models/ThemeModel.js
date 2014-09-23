@@ -1,5 +1,6 @@
 
 var dependencies = [
+	'underscore'
 ];
 
 define(dependencies, function() {
