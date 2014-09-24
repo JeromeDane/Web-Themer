@@ -1,7 +1,8 @@
 var dependencies = [
+	'themer',
 	'app/views/ThemeRowView'
 ];
-define(dependencies, function(ThemeRowView) {
+define(dependencies, function(Themer, ThemeRowView) {
 
 	var ThemeListView = Backbone.View.extend({
 		
@@ -28,7 +29,9 @@ define(dependencies, function(ThemeRowView) {
 			
 			_.each(this.collection.models, function(theme) {
 
-				var view = new ThemeRowView({ model:theme });
+				var view = new ThemeRowView({ 
+					model:theme
+				});
 
 				this.$el.append(view.render().el);				
 				

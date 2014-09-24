@@ -1,13 +1,22 @@
 var dependencies = [
-	'jquery'
+	'themer',
+	'app/views/ThemeListView'
 ];
 
-var Themer = com.jeromedane.webthemer.Themer;
-
-jQuery(function($) {
+define(dependencies, function(Themer, ThemeListView) {
 	
-	Themer.init(function() {
-		var view = new com.jeromedane.webthemer.views.ThemeListView();
-	});
+	console.log(Themer);
 	
+	return new (function() {
+		
+		this.init = function() {
+			Themer.init(function() {
+				var view = new ThemeListView();
+				view.setElement($('#themeList'));
+				console.log($('#themeList').size());
+				view.render();
+			});
+		};
+	})();
+		
 });

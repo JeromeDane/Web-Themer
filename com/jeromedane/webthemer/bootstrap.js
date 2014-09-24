@@ -23,14 +23,16 @@ require(dependencies, function() {
 
 	// options.html
 	if (document.location.toString().match(/options\.html/)) {
-		require(['com/jeromedane/webthemer/options'], function(options) {
+		require(['app/options'], function(options) {
 			options.init();
 		});
 	}
 
-	// options.html
+	// popup.html
 	if (document.location.toString().match(/popup\.html/)) {
-
+		require(['app/popup'], function(popup) {
+			popup.init();
+		});
 	}
 });
 
