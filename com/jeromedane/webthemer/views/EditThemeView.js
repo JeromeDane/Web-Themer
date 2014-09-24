@@ -18,11 +18,20 @@ define(dependencies, function(Themer, Template) {
 			
 		},
 		
-		events : {
-			'click #saveButton' : 'save_theme',
-			'click #saveAndCloseButton' : 'save_and_close_theme',
-			'click #deleteThemeButton' : 'delete_theme',
-			'click #cancelEditThemeButton' : 'cancel'
+		initButtons:function() {
+			var _this = this;
+			$('#saveButton', this.$el).click(function() {
+				_this.save_theme();
+			});
+			$('#saveAndCloseButton', this.$el).click(function() {
+				_this.save_and_close_theme();
+			});
+			$('#deleteThemeButton', this.$el).click(function() {
+				_this.delete_theme();
+			});
+			$('#cancelEditThemeButton', this.$el).click(function() {
+				_this.cancel();
+			});
 		},
 		save_theme: function(e) {
 			this.model.set('name', $('#edit_theme_name').val());
@@ -80,6 +89,8 @@ define(dependencies, function(Themer, Template) {
 			var height = $(window).height() - 250;
 			$('#edit_theme_css').height(height);
 			$('#edit_theme_css').parent().height(height + 10);
+			
+			this.initButtons();
 			
 			this.originalCss = this.editor.getValue();
 			
