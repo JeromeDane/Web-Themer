@@ -168,7 +168,6 @@ function buildWebThemer(ThemeModel, ThemeCollection) {
 			chrome.extension.sendRequest(params, function(response) {
 				if(typeof(reply) == 'function') {
 					reply(response);
-					
 				}
 			});
 		}
@@ -188,8 +187,6 @@ function buildWebThemer(ThemeModel, ThemeCollection) {
 				// load personal data
 				_loadData(function(data) {
 				
-					console.log(data);
-					
 					if(typeof(reply) == "function") {
 						reply();				
 					}

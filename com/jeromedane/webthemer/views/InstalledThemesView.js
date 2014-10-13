@@ -1,9 +1,10 @@
 var dependencies = [
 	'themer',
 	'template',
-	'app/views/ThemeListView'
+	'app/views/ThemeListView',
+	'app/models/ThemeModel'
 ];
-define(dependencies, function(Themer, Template, ThemeListView) {
+define(dependencies, function(Themer, Template, ThemeListView, ThemeModel) {
 	
 	var View = Backbone.View.extend({
 		
@@ -29,7 +30,7 @@ define(dependencies, function(Themer, Template, ThemeListView) {
 			});
 			
 			$('#newThemeButton').click(function() {
-				var theme = new com.jeromedane.webthemer.models.ThemeModel();
+				var theme = new ThemeModel();
 				
 				themesCollection.add(theme);
 				Themer.saveData();
