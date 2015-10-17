@@ -1,0 +1,26 @@
+{
+  "name": "web-themer",
+  "version": "0.0.1",
+  "description": "Manage and apply style themes for any web site.",
+  "main": "background.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://jeromedane@github.com/JeromeDane/Web-Themer.git"
+  },
+  "keywords": [
+    "web",
+    "theme",
+    "themes",
+    "style",
+    "css"
+  ],
+  "author": "Jerome Dane <jeromedane.com>",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/JeromeDane/Web-Themer/issues"
+  },
+  "homepage": "https://github.com/JeromeDane/Web-Themer#readme"
+}
