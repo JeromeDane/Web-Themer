@@ -2,8 +2,12 @@
 	"manifest_version": 2,
 	"name": "__MSG_extName__",
 	"description": "__MSG_extDesc__",
-	"version": "0.0.1",
-	"permissions": ["bookmarks", "tabs", "storage"],
+	"version": "<%= version %>",
+	"permissions": [
+		"bookmarks", 
+		"tabs", 
+		"storage"
+	],
 	"default_locale": "en",
 	"options_page": "options.html",
 	"content_scripts": [

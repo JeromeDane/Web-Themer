@@ -26,6 +26,7 @@
   "devDependencies": {
     "del": "^2.0.2",
     "gulp": "^3.9.0",
+    "gulp-template": "^3.0.0",
     "webpack": "^1.12.2"
   }
 }
