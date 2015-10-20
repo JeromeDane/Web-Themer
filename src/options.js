@@ -1,12 +1,8 @@
+var OptionsView = require('./views/options');
 
-function init() {
-	document.getElementById('btn').onclick = function() {
-		alert('s');
-	}
-}
-
-function loadThemes() {
-	
-}
-
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", function() {
+	var optionsView = new OptionsView({
+		el: document.body
+	});
+	optionsView.render();
+});
