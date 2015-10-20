@@ -27,14 +27,17 @@ var paths = {
 	images: 'client/img/**/*'
 };
 
-
-gulp.task('default', ['manifest'], function () {
+gulp.task('default', ['scripts', 'images'], function () {
 
 });
 
-gulp.task('copy', function () {
-	return gulp.src('src/**')
-			.pipe(gulp.dest('build'));
+gulp.task('scripts', ['background', 'manifest', 'options', 'content'], function (callback) {
+	callback();
+});
+
+gulp.task('images', function() {
+	return gulp.src('src/img/**')
+			.pipe(gulp.dest('build/img'));
 });
 
 gulp.task('manifest', function () {
@@ -52,6 +55,44 @@ gulp.task('background', function () {
 						//{test: /\.css$/, loader: 'style!css' }
 					]
 				},
+				devtool: 'inline-source-map'
+			}))
+			.pipe(rename("background.js"))
+			.pipe(gulp.dest('./build'));
+});
+
+gulp.task('options', ['options-js', 'options-html'], function(callback) {
+	callback();
+});
+
+gulp.task('options-html', function() {
+	return gulp.src('src/options.html')
+			.pipe(gulp.dest('build'));
+});
+
+gulp.task('options-js', function () {
+	return gulp.src("./src/options.js")
+			.pipe(webpack({
+				module: {
+					loaders: [
+						//{test: /\.png$/, loader: "url-loader?mimetype=image/png"},
+						//{test: /\.css$/, loader: 'style!css' }
+					]
+				},
+				devtool: 'inline-source-map'
+			}))
+			.pipe(rename("options.js"))
+			.pipe(gulp.dest('./build'));
+});
+gulp.task('content', function () {
+	return gulp.src("./src/content.js")
+			.pipe(webpack({
+				module: {
+					loaders: [
+						//{test: /\.png$/, loader: "url-loader?mimetype=image/png"},
+						//{test: /\.css$/, loader: 'style!css' }
+					]
+				},
 				devtool: 'inline-source-map',
 				resolve: {
 					alias: {
@@ -59,19 +100,23 @@ gulp.task('background', function () {
 					}
 				}
 			}))
-			.pipe(rename("background.js"))
+			.pipe(rename("content.js"))
 			.pipe(gulp.dest('./build'));
 });
 
-gulp.task('watch', ['default', 'watch-extension'], function () {
-	// Create a full build for Chrome and automatically update it when files change
-	gulp.watch('src/**/*.*', ['default']);
+gulp.task('watch', ['default', 'watch-reloader', 'watch-options'], function () {
+
 });
 
-gulp.task('watch-extension', function () {
+gulp.task('watch-reloader', function () {
 	io = io.listen(WEB_SOCKET_PORT);
-	watch('./build/**', function (file) {
+	watch('./build/background.js', function (file) {
 		console.log('change detected', file.relative);
 		io.emit('file.change', {});
 	});
+});
+
+gulp.task('watch-options', function() {
+	gulp.watch('src/options.html', ['options-html']);
+	gulp.watch('src/options.js', ['options-js']);
 });
