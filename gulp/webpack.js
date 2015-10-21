@@ -1,3 +1,5 @@
+"use strict";
+
 var webpack = require('webpack');
 
 // run webpack, applying project specific settings

@@ -1,3 +1,5 @@
+"use strict";
+
 chrome.extension.onRequest.addListener(function (request, sender, reply) {
 	switch (request.name) {
 		case 'injectScript':
