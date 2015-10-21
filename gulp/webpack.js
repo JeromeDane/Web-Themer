@@ -1,4 +1,4 @@
-var webpackOrig = require('webpack');
+var webpack = require('webpack');
 
 // run webpack, applying project specific settings
 module.exports = function(config, callback) {
@@ -21,5 +21,5 @@ module.exports = function(config, callback) {
 		//{test: /\.png$/, loader: "url-loader?mimetype=image/png"},
 	);
 	*/
-	webpackOrig(config, callback);
+	webpack(config, callback);
 };

@@ -47,16 +47,27 @@ gulp.task('manifest', function () {
 			.pipe(gulp.dest('build'));
 });
 
-gulp.task('background', ['background-js', 'background-html'], function () {
-});
-
 gulp.task('options', ['options-js', 'options-html'], function (callback) {
 	callback();
 });
-
+gulp.task('options-js', function (callback) {
+	webpack({
+		entry: {
+			options: "./src/options.js"
+		}
+	}, callback);
+});
 gulp.task('options-html', function () {
 	return gulp.src('src/options.html')
 			.pipe(gulp.dest('build'));
+});
+
+gulp.task('background', function (callback) {
+	webpack({
+		entry: {
+			background: "./src/background.js"
+		}
+	}, callback);
 });
 
 gulp.task('min', function (callback) {
@@ -77,18 +88,10 @@ gulp.task('min', function (callback) {
 	}, callback);
 });
 
-gulp.task('options-js', function (callback) {
-	webpack({
-		entry: {
-			options: "./src/options.js"
-		}
-	}, callback);
-});
-
 gulp.task('content', function (callback) {
 	webpack({
 		entry: {
-			options: "./src/content.js"
+			content: "./src/content.js"
 		}
 	}, callback);
 });
