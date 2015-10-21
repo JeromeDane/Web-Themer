@@ -17,7 +17,7 @@ function getPackageDetails() {
 };
 
 // remove all build and distribution files
-gulp.task('clean', function (callback) {
+gulp.task('clean', function(callback) {
 	del('build');
 	del('dist');
 	callback();
@@ -32,7 +32,7 @@ gulp.task('default', ['scripts', 'images'], function () {
 
 });
 
-gulp.task('scripts', ['background', 'manifest', 'options', 'content'], function (callback) {
+gulp.task('scripts', ['background', 'manifest', 'options', 'content'], function(callback) {
 	callback();
 });
 
@@ -47,10 +47,10 @@ gulp.task('manifest', function () {
 			.pipe(gulp.dest('build'));
 });
 
-gulp.task('options', ['options-js', 'options-html'], function (callback) {
+gulp.task('options', ['options-js', 'options-html'], function(callback) {
 	callback();
 });
-gulp.task('options-js', function (callback) {
+gulp.task('options-js', function(callback) {
 	webpack({
 		entry: {
 			options: "./src/options.js"
@@ -62,7 +62,7 @@ gulp.task('options-html', function () {
 			.pipe(gulp.dest('build'));
 });
 
-gulp.task('background', function (callback) {
+gulp.task('background', function(callback) {
 	webpack({
 		entry: {
 			background: "./src/background.js"
@@ -70,7 +70,7 @@ gulp.task('background', function (callback) {
 	}, callback);
 });
 
-gulp.task('min', function (callback) {
+gulp.task('min', function(callback) {
 	webpack({
 		entry: {
 			options: "./src/options.js",
@@ -88,7 +88,7 @@ gulp.task('min', function (callback) {
 	}, callback);
 });
 
-gulp.task('content', function (callback) {
+gulp.task('content', function(callback) {
 	webpack({
 		entry: {
 			content: "./src/content.js"
