@@ -4,7 +4,7 @@ var webpack = require('webpack');
 
 // run webpack, applying project specific settings
 module.exports = function(config, callback) {
-	config['dev-tools'] = 'source-map';
+	config['devtool'] = 'source-map';
 	config.output = {
 		path: "./build",
 		filename: "[name].js"
