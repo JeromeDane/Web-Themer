@@ -3,8 +3,8 @@
 var webpack = require('webpack');
 
 // run webpack, applying project specific settings
-module.exports = function(buildType, config, callback) {
-	config['dev-tools'] = 'source-map';
+module.exports = function(config, callback) {
+	config['devtool'] = 'source-map';
 	config.output = {
 		path: "./build/" + buildType,
 		filename: "[name].js"
