@@ -18,3 +18,8 @@ gulp.task('clean', function(callback) {
 gulp.task('default', ['chrome'], function () {
 
 });
+
+gulp.task('css-normalize', function (callback) {
+	return gulp.src('node_modules/normalize.css/normalize.css')
+		.pipe(gulp.dest('src/styles'));
+});

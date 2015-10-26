@@ -1,5 +1,7 @@
-$primary-color: red;
+@import "normalize";
+
+$bgcolor: #fff;
 
 body {
-	background: $primary-color;
+  background-color: $bgcolor;
 }

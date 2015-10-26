@@ -1,6 +1,7 @@
+
 "use strict";
 
-var OptionsView = require('./views/options');
+var OptionsView = require('../views/options');
 
 document.addEventListener("DOMContentLoaded", function() {
 	var optionsView = new OptionsView({

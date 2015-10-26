@@ -12,8 +12,9 @@ function getPackageDetails() {
 	return JSON.parse(fs.readFileSync("./package.json", "utf8"));
 };
 
-gulp.task('chrome', ['chrome-scripts', 'chrome-images', 'chrome-css', 'chrome-locales'], function () {
-
+gulp.task('chrome', ['chrome-scripts', 'chrome-images', 'chrome-css', 'chrome-locales'], function (callback) {
+	console.log('chrome extension built');
+	callback();
 });
 
 gulp.task('chrome-scripts', ['chrome-background', 'chrome-manifest', 'chrome-options', 'chrome-content'], function(callback) {
@@ -31,7 +32,7 @@ gulp.task('chrome-locales', function () {
 });
 
 gulp.task('chrome-manifest', function () {
-	return gulp.src('src/manifest.json')
+	return gulp.src('src/chrome/manifest.json')
 			.pipe(template(getPackageDetails()))
 			.pipe(gulp.dest('build/chrome'));
 });
@@ -42,24 +43,31 @@ gulp.task('chrome-options', ['chrome-options-js', 'chrome-options-html'], functi
 gulp.task('chrome-options-js', function(callback) {
 	webpack('chrome', {
 		entry: {
-			options: "./src/options.js"
+			options: "./src/chrome/options.js"
 		}
 	}, callback);
 });
+
 gulp.task('chrome-options-html', function () {
-	return gulp.src('src/options.html')
+	return gulp.src('src/chrome/options.html')
 			.pipe(gulp.dest('build/chrome'));
 });
-gulp.task('chrome-css', function () {
+
+gulp.task('chrome-css-scss', ['css-normalize'], function (callback) {
 	return gulp.src('src/styles/*.scss')
 			.pipe(sass().on('error', sass.logError))
 			.pipe(gulp.dest('build/chrome/styles'));
 });
 
+gulp.task('chrome-css', ['chrome-css-scss'], function (callback) {
+	del('src/styles/normalize.css');
+	callback();
+});
+
 gulp.task('chrome-background', function(callback) {
 	webpack('chrome', {
 		entry: {
-			background: "./src/background.js"
+			background: "./src/chrome/background.js"
 		}
 	}, callback);
 });
@@ -67,9 +75,9 @@ gulp.task('chrome-background', function(callback) {
 gulp.task('chrome-min', function(callback) {
 	webpack('chrome', {
 		entry: {
-			options: "./src/options.js",
-			background: "./src/background.js",
-			content: "./src/content.js"
+			options: "./src/chrome/options.js",
+			background: "./src/chrome/background.js",
+			content: "./src/chrome/content.js"
 		},
 		plugins: [
 			new webpack.optimize.DedupePlugin(),
@@ -85,7 +93,7 @@ gulp.task('chrome-min', function(callback) {
 gulp.task('chrome-content', function(callback) {
 	webpack('chrome', {
 		entry: {
-			content: "./src/content.js"
+			content: "./src/chrome/content.js"
 		}
 	}, callback);
 });

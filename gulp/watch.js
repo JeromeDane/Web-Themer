@@ -7,21 +7,25 @@ var io = require('socket.io');
 // web socket port for chrome auto-reload extension (https://github.com/JeromeDane/chrome-extension-auto-reload)
 var WEB_SOCKET_PORT = 8890;
 
-gulp.task('watch', ['default', 'watch-reloader', 'watch-options'], function () {
-
+gulp.task('chrome-watch', ['chrome', 'chrome-watch-reloader', 'chrome-watch-code'], function (callback) {
+	console.log('watching for changes in chrome extension');
+	callback();
 });
 
-gulp.task('watch-reloader', function () {
+gulp.task('chrome-watch-reloader', function (callback) {
 	io = io.listen(WEB_SOCKET_PORT);
-	watch('./build/background.js', function (file) {
+	watch('./build/chrome/background.js', function (file) {
 		console.log('change detected in', file.relative);
 		io.emit('file.change', {});
 	});
+	console.log('launched chrome extension reloader')
+	callback();
 });
 
-gulp.task('watch-options', function () {
-	gulp.watch('src/styles/*.scss', ['css']);
-	gulp.watch('src/options.html', ['options-html']);
-	gulp.watch(['src/options.js', 'src/views/**'], ['options-js']);
-	gulp.watch('src/background.js', ['background']);
+gulp.task('chrome-watch-code', function (callback) {
+	gulp.watch('src/styles/*.scss', ['chrome-css']);
+	gulp.watch('src/chrome/options.html', ['chrome-options-html']);
+	gulp.watch(['src/chrome/options.js', 'src/views/**'], ['chrome-options-js']);
+	gulp.watch('src/chrome/background.js', ['chrome-background']);
+	callback();
 });
