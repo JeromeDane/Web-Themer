@@ -4,10 +4,11 @@
 	"description": "__MSG_extDesc__",
 	"version": "<%= version %>",
 	"permissions": [
-		"bookmarks", 
+		"bookmarks",
 		"tabs",
 		"storage"
 	],
+	"default_locale": "en",
 	"options_page": "options.html",
 	"content_scripts": [
 		{
