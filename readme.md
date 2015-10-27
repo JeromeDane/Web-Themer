@@ -44,6 +44,10 @@ npm test
 A browser window will be opened with the results of the tests.
 
 
+## License
+
+This work is licensed under GPL v2. Please make sure to credit this original repo if you fork and re-distrute anything based on this. If you make fixes or cool changes, please create a pull request so that they can be incorporated back into official releases.
+
 ## Credits
 
 Icon source: https://www.iconfinder.com/icons/28668/theme_icon (GPL License)
