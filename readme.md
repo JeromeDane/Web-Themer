@@ -1,8 +1,8 @@
 # Web Themer
 
-This project is a work in progress.
+**This is a work in progress.** Stay tuned for updates.
 
-Stay tuned for updates
+Easily restyle any web page with Web Themer, a user style manager similar to Stylish.
 
 ## Build Scripts
 
