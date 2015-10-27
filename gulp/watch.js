@@ -14,7 +14,10 @@ gulp.task('chrome-watch', ['chrome', 'chrome-watch-reloader', 'chrome-watch-code
 
 gulp.task('chrome-watch-reloader', function (callback) {
 	io = io.listen(WEB_SOCKET_PORT);
-	watch('./build/chrome/background.js', function (file) {
+	watch([
+		'./build/chrome/background.js',
+		'./build/chrome/_locales/**'
+	], function (file) {
 		console.log('change detected in', file.relative);
 		io.emit('file.change', {});
 	});
@@ -27,5 +30,6 @@ gulp.task('chrome-watch-code', function (callback) {
 	gulp.watch('src/chrome/options.html', ['chrome-options-html']);
 	gulp.watch(['src/chrome/options.js', 'src/views/**'], ['chrome-options-js']);
 	gulp.watch('src/chrome/background.js', ['chrome-background']);
+	gulp.watch('src/chrome/_locales/**', ['chrome-locales']);
 	callback();
 });

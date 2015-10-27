@@ -16,7 +16,7 @@ gulp.task('clean', function(callback) {
 	callback();
 });
 
-gulp.task('default', ['chrome'], function () {
+gulp.task('default', ['chrome', 'test-build'], function () {
 
 });
 

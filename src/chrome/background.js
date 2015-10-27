@@ -29,4 +29,3 @@ chrome.extension.onRequest.addListener(function (request, sender, reply) {
 	}
 });
 
-console.log('test3');
