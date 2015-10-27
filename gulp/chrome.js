@@ -22,8 +22,8 @@ gulp.task('chrome-scripts', ['chrome-background', 'chrome-manifest', 'chrome-opt
 });
 
 gulp.task('chrome-images', function () {
-	return gulp.src('src/img/**')
-			.pipe(gulp.dest('build/chrome/img'));
+	return gulp.src('src/images/**')
+			.pipe(gulp.dest('build/chrome/images'));
 });
 
 gulp.task('chrome-locales', function () {

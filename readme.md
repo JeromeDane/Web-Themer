@@ -42,3 +42,8 @@ npm test
 ```
 
 A browser window will be opened with the results of the tests.
+
+
+## Credits
+
+Icon source: https://www.iconfinder.com/icons/28668/theme_icon (GPL License)
