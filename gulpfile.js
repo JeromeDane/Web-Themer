@@ -3,6 +3,7 @@ var del = require('del');
 
 require('./gulp/chrome');
 require('./gulp/watch');
+require('./gulp/tests');
 
 function getPackageDetails() {
 	return JSON.parse(fs.readFileSync("./package.json", "utf8"));
