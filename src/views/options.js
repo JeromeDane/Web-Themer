@@ -5,7 +5,6 @@ var viewProperties = {
 	template: require('../templates/options.html'),
 
 	render: function() {
-		alert('body');
 		this.$el.html(this.template());
 	}
 };
