@@ -11,10 +11,8 @@ module.exports = function(buildType, config, callback) {
 	};
 	config.module = config.module || {};
 	config.module.loaders = config.module.loaders || [];
-	config.module.loaders.push({
-		test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
-	});
+	config.module.loaders.push({ test: /\.scss$/, loaders: ["style", "css", "sass"] });
+  config.module.loaders.push({ test: /\.md$/, loader: "html!markdown" });
 	config.module.loaders.push(
 		{ test: /\.html$/, loader: "underscore-template-loader" }
 	);

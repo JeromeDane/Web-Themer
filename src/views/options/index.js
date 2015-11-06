@@ -1,4 +1,5 @@
-var Backbone = require('backbone'),
+var $ = require('jquery'),
+	Backbone = require('backbone'),
 	AboutView = require('./about'),
 	InstalledStylesView = require('./installed-styles'),
 	SettingsView = require('./settings');
@@ -9,7 +10,9 @@ var viewProperties = {
 
 	initialize: function() {
 		this.views = {
-			about: new AboutView();
+			about: new AboutView(),
+			settings: new SettingsView(),
+			'installed-styles': new InstalledStylesView()
 		};
 	},
 
@@ -19,12 +22,21 @@ var viewProperties = {
 
 	showClickedNavView: function(evt) {
 		var target = evt.target.href.match(/#(.+)$/)[1];
-		this.views[target].setElem($('.content', this.$el));
-		this.views[target].render();
+		this.renderContent(target);
 	},
 
 	render: function() {
 		this.$el.html(this.template());
+
+		var urlMatch = document.location.toString().match(/#(.+)$/);
+		this.renderContent(urlMatch ? urlMatch[1] : 'installed-styles');
+	},
+
+	renderContent: function(target) {
+		this.views[target].setElement($('.content .padding', this.$el));
+		this.views[target].render();
+		$('.nav a', this.$el).removeClass('active');
+		$('.nav a[href$="#' + target + '"]', this.$el).addClass('active');
 	}
 };
 

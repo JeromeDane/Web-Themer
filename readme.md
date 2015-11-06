@@ -4,6 +4,10 @@
 
 Easily restyle any web page with Web Themer, a user style manager similar to Stylish.
 
+## Links
+
+* [Project Home Page (GitHub)](https://github.com/jeromedane/Web-Themer)
+
 ## Build Scripts
 
 From the root of your repo:
