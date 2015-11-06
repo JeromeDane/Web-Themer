@@ -5,10 +5,10 @@
   "main": "background.js",
   "scripts": {
     "test": "gulp test",
-	"build": "gulp",
-	"build-chrome": "gulp chrome",
-	"watch-chrome": "gulp chrome-watch",
-	"clean": "gulp clean"
+    "build": "gulp",
+    "build:chrome": "gulp chrome",
+    "watch:chrome": "gulp chrome-watch",
+    "clean": "gulp clean"
   },
   "repository": {
     "type": "git",

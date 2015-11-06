@@ -1,7 +1,38 @@
-"use strict";
+'use strict';
 
-chrome.extension.onRequest.addListener(function (request, sender, reply) {
-	switch (request.name) {
+/**
+ * Inject CSS into a tab, overwriting any existing styles previously
+ * injected by this Extension
+ */
+function injectCss(tab) {
+	var css = getCssForUrl(tab.url);
+	chrome.tabs.sendMessage(tab.id, { type: "inject-css", data: css}, function(response) {});
+}
+
+// get the css to apply to a specific URL
+function getCssForUrl(url) {
+	var css = 'body { background: red !important; }';;
+	return css;
+	return "HERE: " + url;
+};
+
+// update tab CSS AND badge when selected
+chrome.tabs.onActivated.addListener(function(details) {
+	chrome.tabs.get(details.tabId, function(tab) {
+		injectCss(tab);
+		//updateTabBadge(tab);
+	});
+});
+
+// listen for messages from other parts of the extension
+chrome.runtime.onMessage.addListener(function (request, sender, reply) {
+
+	switch (request.type) {
+		case 'get-css-for-url':
+			reply(getCssForUrl(request.data));
+			break;
+
+		/*
 		case 'injectScript':
 			createBookmark(request.url, request.title, reply);
 			break;
@@ -26,6 +57,6 @@ chrome.extension.onRequest.addListener(function (request, sender, reply) {
 			return;	// deprecated
 			updateAllTabBadges();
 			break;
+		*/
 	}
 });
-
