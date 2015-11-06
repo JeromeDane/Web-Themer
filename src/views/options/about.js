@@ -1,8 +1,8 @@
-var Backbone = require('Backbone');
+var Backbone = require('backbone');
 
 var viewProperties = {
 
-	template: require('../templates/options.html'),
+	template: require('../../templates/options/about.html'),
 
 	render: function() {
 		this.$el.html(this.template());
