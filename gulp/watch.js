@@ -29,7 +29,7 @@ gulp.task('chrome-watch-reloader', function (callback) {
 gulp.task('chrome-watch-code', function (callback) {
 	gulp.watch('src/styles/*.scss', ['chrome-css']);
 	gulp.watch('src/chrome/options.html', ['chrome-options-html']);
-	gulp.watch(['src/chrome/options.js', 'src/views/**'], ['chrome-options-js']);
+	gulp.watch(['src/chrome/options.js', 'src/views/**', 'src/templates/**'], ['chrome-options-js']);
 	gulp.watch('src/chrome/background.js', ['chrome-background']);
 	gulp.watch('src/chrome/content.js', ['chrome-content']);
 	gulp.watch('src/chrome/_locales/**', ['chrome-locales']);
