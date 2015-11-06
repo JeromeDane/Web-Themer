@@ -16,11 +16,27 @@ function getCssForUrl(url) {
 	return "HERE: " + url;
 };
 
+function updateTabBadge(tab) {
+
+	//var numThemes = Themer.getThemesForUrl(tab.url, true).length;
+
+	var numThemes = Math.ceil(Math.random() * 10);
+
+	chrome.browserAction.setBadgeText({
+		text: numThemes > 0 ? numThemes + "" : "",
+		tabId: parseInt(tab.id)
+	});
+	chrome.browserAction.setBadgeBackgroundColor({
+		color: '#339933' // TODO: allow user to select badge color in options
+	});
+
+};
+
 // update tab CSS AND badge when selected
 chrome.tabs.onActivated.addListener(function(details) {
 	chrome.tabs.get(details.tabId, function(tab) {
 		injectCss(tab);
-		//updateTabBadge(tab);
+		updateTabBadge(tab);
 	});
 });
 
