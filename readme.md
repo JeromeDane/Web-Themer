@@ -6,36 +6,37 @@ Easily restyle any web page with Web Themer, a user style manager similar to Sty
 
 ## Links
 
-* [Project Home Page (GitHub)](https://github.com/jeromedane/Web-Themer)
+- [Project Home Page (GitHub)](https://github.com/jeromedane/Web-Themer)
+- Chrome Extension Page (coming soon)
 
-## Build Scripts
+## Hack This Project
 
-From the root of your repo:
+- Make sure you have [NodeJS](http://nodejs.org) installed.
+- Clone this repo locally
+- Run `npm intall` in your command line from the root of your local repo to install dependencies
+- See "Build Commands Below"
+
+### Build Commands
+
+In your command line interface at the root of your repo run ...
 
 ```bash
 npm run build
 ```
 
-Generate all  available builds (i.e. chrome and tests) in `./builds/`.
+... to generate a chrome extension build to `./build/chrome/` that can be loaded as an unpacked extension in Chrome.
 
 ```bash
-npm run build-chrome
+npm run watch
 ```
 
-Generate a chrome extension build to `./build/chrome/` that can be loaded as an unpacked extension in Chrome.
-
-```bash
-npm run watch-chrome
-```
-
-Automatically rebuild `./build/chrome/` when changes are made to `./src/`.
-
+... to automatically rebuild `./build/chrome/` when changes are made to `./src/`.
 
 ```bash
 npm run clean
 ```
 
-Clean up (remove) all build files.
+... to clean up (remove) all build files.
 
 ## Tests
 
