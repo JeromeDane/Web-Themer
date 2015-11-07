@@ -1,8 +1,8 @@
 var gulp = require('gulp');
 var del = require('del');
 
-require('./gulp/chrome');
-require('./gulp/tests');
+require('./cfg/gulp/chrome');
+require('./cfg/gulp/tests');
 
 function getPackageDetails() {
 	return JSON.parse(fs.readFileSync("./package.json", "utf8"));

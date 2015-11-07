@@ -3,8 +3,6 @@ var readmeHtml = require('../../../readme.md');
 
 var viewProperties = {
 
-	template: require('../../templates/options/about.html'),
-
 	render: function() {
 		//this.$el.html(this.template());
 		this.$el.html(readmeHtml);
