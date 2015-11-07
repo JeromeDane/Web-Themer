@@ -1,5 +1,7 @@
 'use strict';
 
+console.log('hello from content 5');
+
 (function(global) {
 
 	// style dom element

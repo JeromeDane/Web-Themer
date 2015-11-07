@@ -2,7 +2,6 @@ var gulp = require('gulp');
 var del = require('del');
 
 require('./gulp/chrome');
-require('./gulp/watch');
 require('./gulp/tests');
 
 function getPackageDetails() {

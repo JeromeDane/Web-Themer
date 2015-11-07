@@ -5,9 +5,8 @@
   "main": "background.js",
   "scripts": {
     "test": "gulp test",
-    "build": "gulp",
-    "build:chrome": "gulp chrome",
-    "watch:chrome": "gulp chrome-watch",
+    "build": "gulp build",
+    "watch": "gulp watch",
     "clean": "gulp clean"
   },
   "repository": {

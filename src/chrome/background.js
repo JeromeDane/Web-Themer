@@ -11,9 +11,9 @@ function injectCss(tab) {
 
 // get the css to apply to a specific URL
 function getCssForUrl(url) {
+	return "";
 	var css = 'body { background: red !important; }';;
 	return css;
-	return "HERE: " + url;
 };
 
 function updateTabBadge(tab) {

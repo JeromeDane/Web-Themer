@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var webpack = require('./webpack');
+var webpack = require('webpack');
 var shell = require('gulp-shell')
 var watch = require('gulp-watch');
 var open = require('gulp-open');
