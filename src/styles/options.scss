@@ -14,6 +14,15 @@ $dark3: #333;
 $dark4: #444;
 $dark5: #555;
 
+$actionBg: rgb(29, 182, 231);
+$actionText: #fff;
+$cancelBg: rgb(127, 128, 127);
+$cancelText: #fff;
+$confirmBg: rgb(25, 181, 60);
+$confirmBgDisabled: rgb(80, 101, 85);
+$confirmText: #fff;
+$confirmTextDisabled: #999;
+
 body {
   background-color: $dark4;
   color: $light2;
@@ -26,6 +35,30 @@ h2,
 h3,
 h4 {
   color: $accent1;
+}
+
+button {
+  padding: .5em 1em;
+  background-color: $actionBg;
+  color: $actionText;
+  border: none;
+  border-radius: 2px;
+}
+button.cancel {
+  background-color: $cancelBg;
+  color: $cancelText;
+}
+button.confirm {
+  background-color: $confirmBg;
+  color: $confirmText;
+}
+button.confirm[disabled] {
+  background-color: $confirmBgDisabled;
+  color: $confirmTextDisabled;
+}
+
+input {
+  color: $dark2;
 }
 
 .view-options-index {

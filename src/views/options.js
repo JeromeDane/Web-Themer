@@ -1,49 +1,79 @@
 var $ = require('jquery'),
-	Backbone = require('backbone'),
-	AboutView = require('./options/about'),
-	InstalledStylesView = require('./options/installed-styles'),
-	SettingsView = require('./options/settings');
+  Backbone = require('backbone'),
+  AboutView = require('./options/about'),
+  InstalledThemesView = require('./options/themes'),
+  EditStyleView = require('./options/edit-theme'),
+  SettingsView = require('./options/settings'),
+  ThemeModel = require('../models/theme');
 
 // TODO: Get webpack scss loader working rather than building as separate gulp process
 //require('../styles/options.scss');
 
 var viewProperties = {
 
-	template: require('../templates/options.html'),
+  template: require('../templates/options.html'),
 
-	initialize: function() {
-		this.views = {
-			about: new AboutView(),
-			settings: new SettingsView(),
-			'installed-styles': new InstalledStylesView()
-		};
+  initialize: function() {
+    this.views = {
+      about: new AboutView(),
+      settings: new SettingsView(),
+      themes: new InstalledThemesView(),
+      'edit-theme': new EditStyleView()
+    };
 
-		this.styles = require('../collections/styles').getInstance();
-		console.log(this.styles);
-	},
+    this.themes = require('../collections/themes').getInstance();
 
-	events: {
-		'click .nav a': 'showClickedNavView'
-	},
+    // listen to sub views for events
+    this.views.themes.on('create', this.createTheme, this);
+    this.views.themes.on('edit', this.editTheme, this);
+    this.views['edit-theme'].on('edit', this.saveTheme, this);
+    this.views['edit-theme'].on('close', this.render, this);
+  },
 
-	showClickedNavView: function(evt) {
-		var target = evt.target.href.match(/#(.+)$/)[1];
-		this.renderContent(target);
-	},
+  createTheme: function() {
+    this.views['edit-theme'].setModel(new ThemeModel());
+    this.renderContent('edit-theme');
+  },
 
-	render: function() {
-		this.$el.html(this.template());
+  editTheme: function(theme) {
+    console.log('editing', theme);
+    this.views['edit-theme'].setModel(theme);
+    this.renderContent('edit-theme');
+  },
 
-		var urlMatch = document.location.toString().match(/#(.+)$/);
-		this.renderContent(urlMatch ? urlMatch[1] : 'installed-styles');
-	},
+  events: {
+    'click .nav a': 'showClickedNavView'
+  },
 
-	renderContent: function(target) {
-		this.views[target].setElement($('.content .padding', this.$el));
-		this.views[target].render();
-		$('.nav a', this.$el).removeClass('active');
-		$('.nav a[href$="#' + target + '"]', this.$el).addClass('active');
-	}
+  saveTheme: function(theme) {
+    if(!this.themes.contains(theme)) {
+      this.themes.add(theme);
+    }
+    this.themes.save();
+  },
+
+  showClickedNavView: function(evt) {
+    var target = evt.target.href.match(/#(.+)$/)[1];
+    this.renderContent(target);
+  },
+
+  render: function() {
+    this.$el.html(this.template());
+
+    var urlMatch = document.location.toString().match(/#(.+)$/);
+    this.renderContent(urlMatch ? urlMatch[1] : 'themes');
+  },
+
+  renderContent: function(target) {
+    this.views[target].setElement($('.content .padding', this.$el));
+    this.views[target].render();
+
+    var menuItem = $('.nav a[href$="#' + target + '"]', this.$el);
+    if(menuItem.size() === 1) {
+      $('.nav a', this.$el).removeClass('active');
+      menuItem.addClass('active');
+    }
+  }
 };
 
 module.exports = Backbone.View.extend(viewProperties);

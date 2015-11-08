@@ -1,9 +1,19 @@
 var Backbone = require('backbone');
+var StyleModel = require('../models/theme');
 var styles;
 
 var collectionProperties = {
-  initialize: function() {
 
+  model: StyleModel,
+
+  initialize: function() {
+    var stylesData = JSON.parse(localStorage.getItem('webThemerStyleData'));
+    this.add(stylesData);
+    console.log(this.toJSON());
+  },
+
+  save: function() {
+    localStorage.setItem('webThemerStyleData', JSON.stringify(this.toJSON()));
   }
 };
 

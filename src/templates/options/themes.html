@@ -1,0 +1,15 @@
+<h1>Installed Themes</h1>
+
+<p>Coming soon ...</p>
+
+<ul>
+  <% _.each(themes, function(theme, i) { %>
+    <li><%- theme.name %>
+      [<a class="edit" data-theme-guid="<%- theme.guid %>">edit</a>]
+    </li>
+  <% }); %>
+</ul>
+
+<div class="edit-theme-wrapper"></div>
+
+<p><button class="new-style">Create New Theme</button></p>

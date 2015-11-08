@@ -6,7 +6,7 @@
 	"permissions": [
 		"bookmarks",
 		"tabs",
-		"storage"
+		"unlimitedStorage"
 	],
 	"default_locale": "en",
 	"options_page": "options.html",
